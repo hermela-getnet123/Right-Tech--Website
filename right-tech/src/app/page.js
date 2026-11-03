@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ClientsSection from "@/components/home/ClientsSection";
 import {
   ArrowRight,
   ArrowUpRight,

@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import TeamSection from "@/components/about/TeamSection";
 import {
   ArrowRight,
   ArrowUpRight,
