@@ -1,4 +1,6 @@
 
+"use client";
+
 import { clients } from "@/data/clients";
 
 export default function ClientsSection() {
@@ -12,18 +14,22 @@ export default function ClientsSection() {
             Building relationships through technology and collaboration.
           </p>
         </div>
+      </div>
 
-        <div className="clients-slider">
-          <div className="clients-track">
-            {[...clients, ...clients].map((client, index) => (
-              <div
-                className="client-logo-card"
-                key={`${client.name}-${index}`}
-              >
-                <img src={client.logo} alt={client.name} loading="lazy" />
-              </div>
-            ))}
-          </div>
+      <div className="clients-slider">
+        <div className="clients-track">
+          {[...clients, ...clients].map((client, index) => (
+            <div
+              className="client-logo-card"
+              key={`${client.name}-${index}`}
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

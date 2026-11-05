@@ -1,16 +1,7 @@
 
 import { teamMembers } from "@/data/team";
-import { Linkedin, Github, Facebook, ArrowUpRight } from "lucide-react";
 
-const socialIcons = {
-  linkedin: Linkedin,
-  github: Github,
-  facebook: Facebook,
-};
-
-export default function TeamSection({ compact = false }) {
-  const members = compact ? teamMembers.slice(0, 3) : teamMembers;
-
+export default function TeamSection() {
   return (
     <section className="team-section" id="team">
       <div className="container">
@@ -18,13 +9,13 @@ export default function TeamSection({ compact = false }) {
           <span className="section-label">THE PEOPLE BEHIND RIGHT TECH</span>
           <h2>Meet Our Team</h2>
           <p>
-            Meet the people contributing their skills and expertise to
-            Right Tech Consulting.
+            Meet the people whose skills and contributions help bring
+            technology solutions to life.
           </p>
         </div>
 
         <div className="team-grid">
-          {members.map((member, index) => (
+          {teamMembers.map((member, index) => (
             <article className="team-card" key={member.name}>
               <div className="team-image-wrap">
                 <img
@@ -42,26 +33,6 @@ export default function TeamSection({ compact = false }) {
                 <h3>{member.name}</h3>
                 <span className="team-role">{member.role}</span>
                 <p>{member.description}</p>
-
-                <div className="team-socials">
-                  {Object.entries(member.social).map(([platform, url]) => {
-                    if (!url) return null;
-                    const Icon = socialIcons[platform];
-                    if (!Icon) return null;
-
-                    return (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${member.name} on ${platform}`}
-                      >
-                        <Icon size={17} />
-                      </a>
-                    );
-                  })}
-                </div>
               </div>
             </article>
           ))}

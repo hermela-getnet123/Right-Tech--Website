@@ -1,8 +1,8 @@
 
 export const clients = [
   {
-    name: "K...",
-    logo: "/images/clients/client-1.png",
+    name: "K by K",
+    logo: "/images/clients/key-by-k.png",
   },
   {
     name: "Charity and Development Association",
@@ -10,18 +10,18 @@ export const clients = [
   },
   {
     name: "YoyTwo7",
-    logo: "/images/clients/client-3.png",
+    logo: "/images/clients/yoye-tu7.png",
   },
   {
     name: "Deborah Foundation",
-    logo: "/images/clients/deborah-foundation.png",
+    logo: "/images/clients/Deborah-foundation.png",
   },
   {
     name: "Wendem Kalid Foundation",
-    logo: "/images/clients/wendem-kalid.png",
+    logo: "/images/clients/wendm-kalid.png",
   },
   {
     name: "Excellent Technologies",
-    logo: "/images/clients/excellent-technologies.png",
+    logo: "/images/clients/excelent-tech.png",
   },
 ];
