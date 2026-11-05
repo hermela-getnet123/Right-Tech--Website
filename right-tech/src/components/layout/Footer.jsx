@@ -1,9 +1,9 @@
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin } from "lucide-react";
 import {
   FaFacebookF,
   FaLinkedinIn,
-  FaInstagram,
 } from "react-icons/fa";
 
 const footerGroups = [
@@ -31,16 +31,27 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container">
-
         <div className="footer-grid">
 
           {/* COMPANY */}
           <div>
-            <Link href="/" className="logo">
-              <div className="logo-mark">R</div>
-              <div>
+            <Link
+              href="/"
+              className="logo"
+              aria-label="Right Tech Consulting home"
+            >
+              <span className="brand-logo-frame">
+                <img
+                  src="/images/rt-logo-site.png"
+                  alt="Right Tech logo"
+                  className="brand-logo-image"
+                />
+              </span>
+
+              <span className="brand-wordmark">
                 RIGHT<span>TECH</span>
-              </div>
+                <small>CONSULTING</small>
+              </span>
             </Link>
 
             <p className="footer-description">
@@ -49,21 +60,24 @@ export default function Footer() {
               and digital transformation.
             </p>
 
-            <div style={{
-              display: "flex",
-              gap: "15px",
-              marginTop: "24px"
-            }}>
-              <a href="#" aria-label="Facebook">
-                <FaFacebookF size={20} />
+            {/* OFFICIAL SOCIAL MEDIA */}
+            <div className="footer-socials">
+              <a
+                href="https://web.facebook.com/p/Right-tech-solution-61569586474057/?_rdc=1&_rdr#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Right Tech on Facebook"
+              >
+                <FaFacebookF size={19} />
               </a>
 
-              <a href="#" aria-label="LinkedIn">
-                <FaLinkedinIn size={20} />
-              </a>
-
-              <a href="#" aria-label="Instagram">
-                <FaInstagram size={20} />
+              <a
+                href="https://www.linkedin.com/company/right-tech-soution/home/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Right Tech on LinkedIn"
+              >
+                <FaLinkedinIn size={19} />
               </a>
             </div>
           </div>
@@ -96,7 +110,10 @@ export default function Footer() {
                 Contact Our Team
                 <ArrowUpRight
                   size={14}
-                  style={{ display: "inline", marginLeft: 5 }}
+                  style={{
+                    display: "inline",
+                    marginLeft: 5,
+                  }}
                 />
               </Link>
 
@@ -108,8 +125,26 @@ export default function Footer() {
                 Explore Our Services
               </Link>
             </div>
-          </div>
 
+            <div className="footer-contact-details">
+              <a href="tel:+251934472222">
+                <Phone size={15} />
+                0934472222
+              </a>
+
+              <a href="tel:+251911064719">
+                <Phone size={15} />
+                0911064719
+              </a>
+
+              <p>
+              <MapPin size={15} />
+              Bole, Getu Commercial Building,
+              10th Floor, Room No. 1002,
+              Addis Ababa, Ethiopia
+            </p>
+            </div>
+          </div>
         </div>
 
         <div className="footer-bottom">
@@ -122,7 +157,6 @@ export default function Footer() {
             Built for a smarter digital future.
           </p>
         </div>
-
       </div>
     </footer>
   );

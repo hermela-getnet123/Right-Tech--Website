@@ -23,7 +23,7 @@ export const teamMembers = [
   },
   {
     name: "Abebe Adamu",
-    role: "Backend developers",
+    role: "Backend Developer",
     image: "/images/team/Abebe.png",
     description:
       "Abebe is Backend Developer – a highly analytical and tech-savvy individual with a strong entrepreneurial spirit. As one of the founders of Right Tech, Abebe brings a unique combination of technical expertise and visionary leadership to the table. Cerebral and detail-oriented, Abebe has a deep fascination with the inner workings of software systems. He thrives on solving complex technical challenges and optimizing backend architectures for maximum efficiency and scalability. His comprehensive understanding of various programming languages, databases, and cloud technologies allows him to architect robust and reliable backend solutions.",

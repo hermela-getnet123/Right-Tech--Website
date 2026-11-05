@@ -310,34 +310,8 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM */}
-      <section className="section about-team-section" id="team">
-        <div className="container">
-          <div className="about-team-heading">
-            <div>
-              <span className="section-label">THE PEOPLE BEHIND THE WORK</span>
-              <h2 className="section-title">Our team</h2>
-              <p className="section-description">
-                Technology is built by people. Get to know the professionals
-                behind Right Tech Consulting.
-              </p>
-            </div>
-          </div>
-
-          <div className="about-team-placeholder">
-            <div className="team-placeholder-icon">
-              <Users size={35} />
-            </div>
-            <h3>Meet the people behind Right Tech.</h3>
-            <p>
-              Team profiles, roles, and professional backgrounds will be
-              featured here.
-            </p>
-            <Link href="/contact" className="inline-link">
-              Contact our team <ArrowUpRight size={17} />
-            </Link>
-          </div>
-        </div>
-      </section>
+{/* TEAM */}
+<TeamSection />
 
       {/* CTA */}
       <section className="section about-cta-section">

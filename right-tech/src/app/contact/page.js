@@ -16,18 +16,25 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
+
 const contactDetails = [
   {
     icon: Mail,
     title: "Email us",
-    value: "info@righttechconsulting.com",
-    href: "mailto:info@righttechconsulting.com",
+    value: "Email address coming soon",
+    href: "#contact-form",
   },
   {
     icon: Phone,
     title: "Call us",
-    value: "Contact our team",
-    href: "tel:",
+    value: "0934472222",
+    href: "tel:+251934472222",
+  },
+  {
+    icon: Phone,
+    title: "Call us",
+    value: "0911064719",
+    href: "tel:+251911064719",
   },
   {
     icon: MapPin,
@@ -42,6 +49,7 @@ const contactDetails = [
     href: "#contact-form",
   },
 ];
+
 
 const initialForm = {
   name: "",
@@ -317,8 +325,11 @@ export default function ContactPage() {
           <div className="contact-location-heading">
             <div>
               <span className="section-label">FIND US</span>
-              <h2>Our location</h2>
-              <p>Find Right Tech Consulting in Addis Ababa, Ethiopia.</p>
+            <h2>Visit Our Office</h2>
+            <p>
+              Find us at Getu Commercial Building, Bole,
+              Addis Ababa, Ethiopia.
+            </p>
             </div>
             <Link
               href="/about"
@@ -329,18 +340,18 @@ export default function ContactPage() {
           </div>
 
           <div className="contact-map">
-            <iframe
-              title="Map of Addis Ababa, Ethiopia"
-              src="https://www.google.com/maps?q=Addis%20Ababa%2C%20Ethiopia&output=embed"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
+          <iframe
+            title="Right Tech Consulting Office Location"
+            src="https://www.google.com/maps?cid=14799861194580733796&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
           </div>
-          <p className="contact-map-note">
-            Map currently shows Addis Ababa generally. Replace it with the
-            company's verified office location before publishing.
-          </p>
+        <p className="contact-map-note">
+          Office Address: Getu Commercial Building,
+          10th Floor, Room No. 1002, Bole, Addis Ababa.
+        </p>
         </div>
       </section>
     </div>

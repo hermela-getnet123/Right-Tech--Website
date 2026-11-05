@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -42,13 +43,20 @@ export default function Navbar() {
     <header className="site-header">
       <div className="container navbar">
 
-        {/* LOGO */}
-        <Link href="/" className="logo">
-          <div className="logo-mark">R</div>
+        {/* COMPANY LOGO */}
+        <Link href="/" className="logo" aria-label="Right Tech Consulting home">
+          <span className="brand-logo-frame">
+            <img
+              src="/images/rt-logo-site.png"
+              alt="Right Tech logo"
+              className="brand-logo-image"
+            />
+          </span>
 
-          <div>
+          <span className="brand-wordmark">
             RIGHT<span>TECH</span>
-          </div>
+            <small>CONSULTING</small>
+          </span>
         </Link>
 
         {/* DESKTOP NAVIGATION */}
@@ -73,7 +81,6 @@ export default function Navbar() {
 
         {/* ACTIONS */}
         <div className="nav-actions">
-
           <button
             className="theme-toggle"
             onClick={() =>
@@ -102,7 +109,6 @@ export default function Navbar() {
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-
         </div>
       </div>
 

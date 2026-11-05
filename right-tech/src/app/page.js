@@ -310,6 +310,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT CTA */}
+      <ClientsSection />
       <section className="home-cta">
         <div className="container home-cta-content">
           <motion.div
