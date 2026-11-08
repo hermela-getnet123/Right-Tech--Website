@@ -33,7 +33,7 @@ export const teamMembers = [
     role: "Founder & CEO",
     image: "/images/team/Nitsuh.png",
     description:
-      "As CEO, Nitsuh is responsible for setting the overall direction of the company, overseeing product development, managing the executive team, and ensuring Acme continues to stay ahead of the curve. Known for his sharp business acumen and ability to inspire his team, Nitsuh has built a company culture focused on creativity, collaboration, and a relentless drive to deliver exceptional customer value.",
+      "As CEO, Nitsuh is responsible for setting the overall direction of the company, overseeing product development, managing the executive team, and ensuring right tech continues to stay ahead of the curve. Known for his sharp business acumen and ability to inspire his team, Nitsuh has built a company culture focused on creativity, collaboration, and a relentless drive to deliver exceptional customer value.",
   },
     
 ];

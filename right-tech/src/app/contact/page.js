@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -16,13 +15,12 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-
 const contactDetails = [
   {
     icon: Mail,
-    title: "Email us",
-    value: "Email address coming soon",
-    href: "#contact-form",
+    title: "Email Us",
+    value: "contact@righttechconsulting.com",
+    href: "mailto:contact@righttechconsulting.com",
   },
   {
     icon: Phone,
@@ -48,8 +46,12 @@ const contactDetails = [
     value: "Contact us for availability",
     href: "#contact-form",
   },
+  {
+    title: "WhatsApp",
+    value: "Chat with us on WhatsApp",
+    href: "https://wa.me/251911064719",
+  },
 ];
-
 
 const initialForm = {
   name: "",
@@ -63,25 +65,45 @@ export default function ContactPage() {
   const [form, setForm] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
-    setErrors((previous) => ({ ...previous, [name]: "" }));
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+
+    setErrors((previous) => ({
+      ...previous,
+      [name]: "",
+    }));
+
+    setErrorMessage("");
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
+    // Existing form validation
     const newErrors = {};
 
-    if (!form.name.trim()) newErrors.name = "Please enter your name.";
+    if (!form.name.trim()) {
+      newErrors.name = "Please enter your name.";
+    }
+
     if (!form.email.trim()) {
       newErrors.email = "Please enter your email.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
-    if (!form.subject) newErrors.subject = "Please select a subject.";
+
+    if (!form.subject) {
+      newErrors.subject = "Please select a subject.";
+    }
+
     if (!form.message.trim()) {
       newErrors.message = "Please enter your message.";
     }
@@ -91,8 +113,44 @@ export default function ContactPage() {
       return;
     }
 
-    setSubmitted(true);
-    setForm(initialForm);
+    // Send message through the API
+    setIsSubmitting(true);
+    setSubmitted(false);
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result.error || "Message could not be sent."
+        );
+      }
+
+      setSubmitted(true);
+      setForm(initialForm);
+      setErrors({});
+    } catch (error) {
+      setErrorMessage(
+        error.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -100,6 +158,7 @@ export default function ContactPage() {
       {/* HERO */}
       <section className="contact-hero">
         <div className="contact-hero-overlay" />
+
         <div className="container contact-hero-content">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -109,13 +168,16 @@ export default function ContactPage() {
             <span className="section-label contact-hero-label">
               GET IN TOUCH
             </span>
+
             <h1>
               Let's start a <span>conversation.</span>
             </h1>
+
             <p>
               Have a project in mind, need a technology solution, or simply
               want to learn more about what we do? We'd love to hear from you.
             </p>
+
             <a href="#contact-form" className="primary-btn">
               Send us a message <ArrowRight size={18} />
             </a>
@@ -132,7 +194,7 @@ export default function ContactPage() {
 
               return (
                 <motion.a
-                  key={item.title}
+                  key={`${item.title}-${index}`}
                   href={item.href}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -141,13 +203,18 @@ export default function ContactPage() {
                   className="contact-detail-card"
                 >
                   <div className="contact-detail-icon">
-                    <Icon size={22} />
+                    {Icon ? <Icon size={22} /> : <MessageCircle size={22} />}
                   </div>
+
                   <div>
                     <h3>{item.title}</h3>
                     <p>{item.value}</p>
                   </div>
-                  <ArrowUpRight className="contact-detail-arrow" size={18} />
+
+                  <ArrowUpRight
+                    className="contact-detail-arrow"
+                    size={18}
+                  />
                 </motion.a>
               );
             })}
@@ -156,7 +223,10 @@ export default function ContactPage() {
       </section>
 
       {/* FORM AND SIDE PANEL */}
-      <section className="section contact-main-section" id="contact-form">
+      <section
+        className="section contact-main-section"
+        id="contact-form"
+      >
         <div className="container contact-main-grid">
           <motion.div
             className="contact-form-card"
@@ -165,7 +235,9 @@ export default function ContactPage() {
             viewport={{ once: true }}
           >
             <span className="section-label">CONTACT FORM</span>
+
             <h2>Tell us what you need.</h2>
+
             <p className="contact-form-intro">
               Share a little about your idea or challenge. Our team can then
               understand how best to assist you.
@@ -174,11 +246,15 @@ export default function ContactPage() {
             {submitted ? (
               <div className="contact-success">
                 <CheckCircle2 size={48} />
-                <h3>Message received!</h3>
+
+                <h3>Message sent successfully!</h3>
+
                 <p>
-                  Your form passed the frontend validation. The form is not
-                  connected to email yet, so no message has been sent.
+                  Thank you for contacting Right Tech Consulting.
+                  Your message has been sent to our team. We'll get back
+                  to you as soon as possible.
                 </p>
+
                 <button
                   className="primary-btn"
                   onClick={() => setSubmitted(false)}
@@ -187,10 +263,15 @@ export default function ContactPage() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="contact-form" noValidate>
+              <form
+                onSubmit={handleSubmit}
+                className="contact-form"
+                noValidate
+              >
                 <div className="contact-form-row">
                   <div className="form-field">
                     <label htmlFor="name">Full name *</label>
+
                     <input
                       id="name"
                       name="name"
@@ -198,11 +279,13 @@ export default function ContactPage() {
                       onChange={handleChange}
                       placeholder="Your full name"
                     />
+
                     {errors.name && <small>{errors.name}</small>}
                   </div>
 
                   <div className="form-field">
                     <label htmlFor="email">Email address *</label>
+
                     <input
                       id="email"
                       name="email"
@@ -211,6 +294,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       placeholder="you@example.com"
                     />
+
                     {errors.email && <small>{errors.email}</small>}
                   </div>
                 </div>
@@ -218,6 +302,7 @@ export default function ContactPage() {
                 <div className="contact-form-row">
                   <div className="form-field">
                     <label htmlFor="phone">Phone number</label>
+
                     <input
                       id="phone"
                       name="phone"
@@ -230,6 +315,7 @@ export default function ContactPage() {
 
                   <div className="form-field">
                     <label htmlFor="subject">Subject *</label>
+
                     <select
                       id="subject"
                       name="subject"
@@ -254,12 +340,14 @@ export default function ContactPage() {
                       </option>
                       <option value="Other">Other</option>
                     </select>
+
                     {errors.subject && <small>{errors.subject}</small>}
                   </div>
                 </div>
 
                 <div className="form-field">
                   <label htmlFor="message">Your message *</label>
+
                   <textarea
                     id="message"
                     name="message"
@@ -268,11 +356,30 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="Tell us about your project or inquiry..."
                   />
+
                   {errors.message && <small>{errors.message}</small>}
                 </div>
 
-                <button type="submit" className="primary-btn contact-submit">
-                  Send message <Send size={17} />
+                {errorMessage && (
+                  <p role="alert" className="contact-error-message">
+                    {errorMessage}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="primary-btn contact-submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      Sending... <Send size={17} />
+                    </>
+                  ) : (
+                    <>
+                      Send message <Send size={17} />
+                    </>
+                  )}
                 </button>
               </form>
             )}
@@ -285,7 +392,9 @@ export default function ContactPage() {
             viewport={{ once: true }}
           >
             <span className="section-label">LET'S CONNECT</span>
+
             <h2>Good ideas start with a conversation.</h2>
+
             <p>
               Whether you're exploring a new digital product, improving a
               business process, or looking for technical guidance, let's
@@ -295,13 +404,13 @@ export default function ContactPage() {
             <div className="contact-side-divider" />
 
             <h3>Looking for a quick conversation?</h3>
+
             <p>
               Reach out through WhatsApp for a more direct conversation.
             </p>
 
-            {/* Replace the placeholder number with the verified company WhatsApp number */}
             <a
-              href="https://wa.me/"
+              href="https://wa.me/251911064719"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-btn"
@@ -320,38 +429,42 @@ export default function ContactPage() {
       </section>
 
       {/* LOCATION */}
-      <section className="section contact-location-section" id="location">
+      <section
+        className="section contact-location-section"
+        id="location"
+      >
         <div className="container">
           <div className="contact-location-heading">
             <div>
               <span className="section-label">FIND US</span>
-            <h2>Visit Our Office</h2>
-            <p>
-              Find us at Getu Commercial Building, Bole,
-              Addis Ababa, Ethiopia.
-            </p>
+
+              <h2>Visit Our Office</h2>
+
+              <p>
+                Find us at Getu Commercial Building, Bole,
+                Addis Ababa, Ethiopia.
+              </p>
             </div>
-            <Link
-              href="/about"
-              className="secondary-btn"
-            >
+
+            <Link href="/about" className="secondary-btn">
               About our company <ArrowUpRight size={17} />
             </Link>
           </div>
 
           <div className="contact-map">
-          <iframe
-            title="Right Tech Consulting Office Location"
-            src="https://www.google.com/maps?cid=14799861194580733796&output=embed"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+            <iframe
+              title="Right Tech Consulting Office Location"
+              src="https://www.google.com/maps?cid=14799861194580733796&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
-        <p className="contact-map-note">
-          Office Address: Getu Commercial Building,
-          10th Floor, Room No. 1002, Bole, Addis Ababa.
-        </p>
+
+          <p className="contact-map-note">
+            Office Address: Getu Commercial Building,
+            10th Floor, Room No. 1002, Bole, Addis Ababa.
+          </p>
         </div>
       </section>
     </div>

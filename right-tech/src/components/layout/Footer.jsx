@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { ArrowUpRight, Phone, MapPin } from "lucide-react";
+import { ArrowUpRight, Phone, MapPin, Mail, MessageCircle } from "lucide-react";
 import {
   FaFacebookF,
   FaLinkedinIn,
@@ -137,6 +137,19 @@ export default function Footer() {
                 0911064719
               </a>
 
+              <a href="mailto:contact@righttechconsulting.com">
+                <Mail size={15} />
+                contact@righttechconsulting.com
+              </a>
+
+              <a
+                href="https://wa.me/251911064719"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle size={15} />
+                WhatsApp
+              </a>
               <p>
               <MapPin size={15} />
               Bole, Getu Commercial Building,
